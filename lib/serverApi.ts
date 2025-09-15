@@ -1,0 +1,17 @@
+import { cookies } from "next/headers"
+import { api } from "./api";
+import type { Note } from "@/types/note";
+
+export async function fetchNoteByIdServer(id: string): Promise<Note> {
+  const cookieStore = await cookies(); 
+  const token = cookieStore.get("token")?.value;
+
+  const response = await api.get<Note>(`/notes/${id}`, {
+    headers: {
+      Cookie: `token=${token}`, 
+    },
+  });
+
+  return response.data;
+}
+

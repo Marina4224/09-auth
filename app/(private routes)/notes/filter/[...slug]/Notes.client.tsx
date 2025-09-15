@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import Pagination from "@/components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { fetchNotes } from "@/lib/api";
+import { fetchNotes } from "@/lib/clientApi";
 import { useDebounce } from "use-debounce";
 import Link from "next/link";
 
