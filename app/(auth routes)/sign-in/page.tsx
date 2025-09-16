@@ -2,42 +2,42 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signUpUser } from "@/lib/clientApi";
+import { signInUser } from "@/lib/clientApi";
 import { useAuthStore } from "@/lib/store/authStore";
-import { ApiError } from '@/app/api/api';
-import css from "@/app/(auth routes)/sign-up/SignUpPage.module.css";
+import css from "./SignInPage.module.css";
+import { ApiError } from '@/app/api/api'
 
-export default function SignUpPage() {
+export default function SignInPage() {
   const router = useRouter();
-  const setUser = useAuthStore((state) => state.setUser);
   const [error, setError] = useState("");
+  const setUser = useAuthStore(state => state.setUser); 
 
-  const handleSubmit = async (formData: FormData) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setError("");
 
-    try {
-      const formValues = Object.fromEntries(formData) as { email: string; password: string };
-      const user = await signUpUser(formValues);
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
 
-      if (user) {
-        setUser(user); 
-        router.push("/profile"); 
-      } else {
-        setError("Invalid email or password");
-      }
+    try {
+      const user = await signInUser({ email, password });
+      setUser(user); 
+      router.push("/profile"); 
     } catch (err) {
-      setError( 
+      setError(
         (err as ApiError).response?.data?.error ??
         (err as ApiError).message ??
-        "Oops... some error"
-      );
+        "Something went wrong"
+      );      
     }
   };
 
   return (
     <main className={css.mainContent}>
-      <h1 className={css.formTitle}>Sign up</h1>
-      <form className={css.form} action={handleSubmit}>
+      <form className={css.form} onSubmit={handleSubmit}>
+        <h1 className={css.formTitle}>Sign in</h1>
+
         <div className={css.formGroup}>
           <label htmlFor="email">Email</label>
           <input
@@ -62,7 +62,7 @@ export default function SignUpPage() {
 
         <div className={css.actions}>
           <button type="submit" className={css.submitButton}>
-            Register
+            Log in
           </button>
         </div>
 
