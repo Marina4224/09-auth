@@ -6,7 +6,6 @@ import { register, RegisterRequest } from "@/lib/api/clientApi";
 import { useAuthStore } from "@/lib/store/authStore";
 import { ApiError } from '@/lib/api/api';
 import css from "@/app/(auth routes)/sign-up/SignUpPage.module.css";
-// import { register } from "module";
 
 export default function SignUpPage() {
   const router = useRouter();

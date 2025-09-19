@@ -5,8 +5,7 @@ import AuthNavigation from "@/components/AuthNavigation/AuthNavigation";
 
 
 export default function Header() {
-  const userEmail = "user@example.com"; 
-
+  
   return (
     <header className={css.header}>
       <Link href="/" aria-label="Home" className={css.navigationLink}>
@@ -18,7 +17,7 @@ export default function Header() {
           <li className={css.navigationItem}>
             <TagsMenu />
           </li>
-          <AuthNavigation userEmail={userEmail} />
+          <AuthNavigation/>
         </ul>
       </nav>
     </header>

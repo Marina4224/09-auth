@@ -28,15 +28,6 @@ export type CheckSessionRequest = {
   success: boolean;
 };
 
-// export interface SignUpParams {
-//   email: string;
-//   password: string;
-// };
-// export interface SignInParams {
-//   email: string;
-//   password: string;
-// };
-
 export const checkSession = async () => {
   const res = await nextServer.get<CheckSessionRequest>('/auth/session');
   return res.data.success;
@@ -90,32 +81,3 @@ export async function deleteNote(id: string): Promise<Note> {
   const res = await nextServer.delete<Note>(`/notes/${id}`);
   return res.data;
 };
-
-// export async function signInUser(data: SignInParams): Promise<User> {
-//   const response = await nextServer.post<User>("/auth/sign-in", data, {
-//     withCredentials: true, 
-//   });
-//   return response.data;
-// };
-
-// export async function signUpUser(data: SignUpParams): Promise<User> {
-//   const response = await nextServer.post<User>("/auth/sign-up", data);
-//   return response.data;
-// };
-// перевірка
-
-// export interface Category {
-//   id: string;
-//   name: string;
-// };
-
-
-
-// export type CreateNoteInput = Omit<Note, "id" | "createdAt" | "updatedAt">;
-
-
-
-// export async function getCategories(): Promise<Category[]> {
-//   const response = await nextServer.get<Category[]>("/categories");
-//   return response.data;
-// };

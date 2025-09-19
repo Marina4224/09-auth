@@ -40,7 +40,7 @@ export default async function NotesPage({ params }: Props) {
 
   await queryClient.prefetchQuery({
     queryKey: ["notes", { query: "", page: 1, tag: tag }],
-    queryFn: () => fetchNotes(1, "", tag),
+    queryFn: () => fetchNotes({ search: "", page: 1, tag }),
   });
 
   return (
