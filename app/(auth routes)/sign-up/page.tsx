@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signUpUser } from "@/lib/clientApi";
+import { register, RegisterRequest } from "@/lib/api/clientApi";
 import { useAuthStore } from "@/lib/store/authStore";
-import { ApiError } from '@/app/api/api';
+import { ApiError } from '@/lib/api/api';
 import css from "@/app/(auth routes)/sign-up/SignUpPage.module.css";
+// import { register } from "module";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -16,8 +17,8 @@ export default function SignUpPage() {
     setError("");
 
     try {
-      const formValues = Object.fromEntries(formData) as { email: string; password: string };
-      const user = await signUpUser(formValues);
+      const formValues = Object.fromEntries(formData) as RegisterRequest;  
+      const user = await register(formValues);
 
       if (user) {
         setUser(user); 

@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import css from './EditProfile.module.css';
+import css from '@/app/(private routes)/profile/edit/EditProfilePage.module.css';
 import { useAuthStore } from '@/lib/store/authStore';
-import { updateUsername } from '@/lib/clientApi';
+import { updateUsername } from '@/lib/api/clientApi';
 
 export default function EditProfilePage() {
   const router = useRouter();

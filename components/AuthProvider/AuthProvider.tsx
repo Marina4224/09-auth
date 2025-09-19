@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useAuthStore } from '@/lib/store/authStore';
-import { checkSession, getMe } from '@/lib/clientApi';
+import { checkSession, getMe } from '@/lib/api/clientApi';
 
 type Props = {
   children: React.ReactNode;
